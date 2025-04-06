@@ -1,9 +1,10 @@
 import './App.css'
+import Test from './components/Test'
 
 function App() {
     return(
     <>
-    <h1>hi</h1>
+        <Test message='Hello World!'/>
     </>)  
 }
 
