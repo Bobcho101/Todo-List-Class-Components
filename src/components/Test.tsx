@@ -19,8 +19,9 @@ export default class Test extends Component<TestProps, TestStates> {
     render() {
         return (
         <>
-            <div>{this.state.word} World!</div>
-            <div>{this.props.message}</div>
+            <h1 className="text-3xl font-bold underline">
+                Hello world!
+            </h1>
         </>)
     }
 }
