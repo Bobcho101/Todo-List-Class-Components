@@ -1,10 +1,10 @@
 import './App.css'
-import Test from './components/Test'
+import TodoList from './components/TodoList'
 
 function App() {
     return(
     <>
-        <Test message='Hello World!'/>
+        <TodoList/>
     </>)  
 }
 
