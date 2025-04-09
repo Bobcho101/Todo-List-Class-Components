@@ -2,7 +2,7 @@ import { Component } from "react";
 
 interface StateI {
     tasks: string[];
-  }
+}
   
 export default class TasksList extends Component<unknown, StateI> {
     constructor(props: unknown){
