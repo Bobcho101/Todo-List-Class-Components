@@ -1,17 +1,40 @@
 import { ChangeEvent, Component, FormEvent } from "react";
+import { v4 as uuid } from "uuid";
+
 import TasksList from "./TasksList";
-import { th } from "framer-motion/client";
+
+interface Task{
+    id: string,
+    text: string,
+}
 
 interface StatesI {
     task: string,
-    tasks: string[],
+    tasks: Task[],
 }
 export default class TodoList extends Component<unknown, StatesI>{
     constructor(props: unknown){
         super(props);
         this.state = {
             'task': '',
-            'tasks': ["Clean the house", "Feed the dog", "Feed the cat", "Go to the store"]
+            'tasks': [
+                { 
+                    text: "Clean the house",
+                    id: uuid(),
+                },
+                { 
+                    text:"Feed the dog",
+                    id: uuid(),
+                },
+                { 
+                    text:"Feed the cat",
+                    id: uuid(),
+                },
+                { 
+                    text:"Go to the store",  
+                    id: uuid(),
+                },
+            ]
         }
         this.formChange = this.formChange.bind(this);
         this.formSubmitHandler = this.formSubmitHandler.bind(this);
