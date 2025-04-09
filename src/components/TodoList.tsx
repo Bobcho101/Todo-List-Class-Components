@@ -62,8 +62,6 @@ export default class TodoList extends Component<unknown, StatesI>{
     }
 
     addTask = (newTask: Task) => {
-        console.log(newTask);
-        
         this.setState({tasks: [ newTask , ...this.state.tasks]});
     }
 
