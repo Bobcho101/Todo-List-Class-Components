@@ -39,7 +39,9 @@ export default class TodoList extends Component<unknown, StatesI>{
         this.formChange = this.formChange.bind(this);
         this.formSubmitHandler = this.formSubmitHandler.bind(this);
         this.addTask = this.addTask.bind(this);
+        this.deleteTask = this.deleteTask.bind(this);
     }
+
     formChange(e: ChangeEvent<HTMLInputElement>){
         const { value } = e.target;
         this.setState({ 'task': value });
@@ -47,18 +49,28 @@ export default class TodoList extends Component<unknown, StatesI>{
 
     formSubmitHandler(e: FormEvent<HTMLFormElement>){
         e.preventDefault();
-        const task: string = this.state.task;
-        if(task.trim() === '') return;
+        const taskText: string = this.state.task;
+        if(taskText.trim() === '') return;
 
-        this.addTask(this.state.task);
+        const newTask: Task = {
+            text: taskText,
+            id: uuid(),
+        }
+
+        this.addTask(newTask);
         this.setState({task: ''});
     }
 
-    addTask = (task: string) => {
-        this.setState({tasks: [task, ...this.state.tasks]});
+    addTask = (newTask: Task) => {
+        console.log(newTask);
+        
+        this.setState({tasks: [ newTask , ...this.state.tasks]});
     }
 
-    
+    deleteTask = (id: string) => {
+        const newTasks = this.state.tasks.filter(task => task.id !== id);
+        this.setState({tasks: newTasks});
+    }
 
     render() {
         return (
@@ -79,7 +91,7 @@ export default class TodoList extends Component<unknown, StatesI>{
                             Add
                         </button>
                     </form>
-                <TasksList tasks={this.state.tasks} />
+                <TasksList tasks={this.state.tasks} deleteTask={this.deleteTask} />
                 </div>
             </div>
         </>)
