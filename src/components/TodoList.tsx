@@ -1,29 +1,41 @@
 import { ChangeEvent, Component, FormEvent } from "react";
 import TasksList from "./TasksList";
+import { th } from "framer-motion/client";
 
 interface StatesI {
-    task: string
+    task: string,
+    tasks: string[],
 }
 export default class TodoList extends Component<unknown, StatesI>{
     constructor(props: unknown){
         super(props);
         this.state = {
             'task': '',
+            'tasks': ["Clean the house", "Feed the dog", "Feed the cat", "Go to the store"]
         }
         this.formChange = this.formChange.bind(this);
         this.formSubmitHandler = this.formSubmitHandler.bind(this);
+        this.addTask = this.addTask.bind(this);
     }
-    formChange(e: ChangeEvent<HTMLFormElement>){
+    formChange(e: ChangeEvent<HTMLInputElement>){
         const { value } = e.target;
-        console.log(value);
-        
         this.setState({ 'task': value });
     }
 
     formSubmitHandler(e: FormEvent<HTMLFormElement>){
         e.preventDefault();
-        
+        const task: string = this.state.task;
+        if(task.trim() === '') return;
+
+        this.addTask(this.state.task);
+        this.setState({task: ''});
     }
+
+    addTask = (task: string) => {
+        this.setState({tasks: [task, ...this.state.tasks]});
+    }
+
+    
 
     render() {
         return (
@@ -44,7 +56,7 @@ export default class TodoList extends Component<unknown, StatesI>{
                             Add
                         </button>
                     </form>
-                <TasksList />
+                <TasksList tasks={this.state.tasks} />
                 </div>
             </div>
         </>)
